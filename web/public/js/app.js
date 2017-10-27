@@ -71,6 +71,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackMissingModule() { throw new Error("Cannot find module \"/Users/rajparekh/Projects/DBMS/chatter/web/resources/assets/js/app.js\""); }());
+(function webpackMissingModule() { throw new Error("Cannot find module \"/Users/rajparekh/Projects/DBMS/chatter/web/resources/assets/sass/init.scss\""); }());
 
 
 /***/ })

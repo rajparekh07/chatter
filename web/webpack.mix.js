@@ -10,7 +10,8 @@ const { mix } = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-// mix.js('resources/assets/js/app.js', 'public/js')
+mix.sass('resources/scss/init.scss', 'public/css')
+    .js('resources/js/init.js', 'public/js');
 //     .combine([
 //     'public/css/icons.css',
 //     'public/css/materialize.min.css',

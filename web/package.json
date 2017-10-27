@@ -16,9 +16,11 @@
     "vue-router": "^2.2.0"
   },
   "dependencies": {
+    "bootstrap": "^4.0.0-beta.2",
     "laravel-mix": "^0.5.16",
-    "webpack": "2.2.0",
     "metro-dist": "latest",
-    "notie": "^4.3.0"
+    "notie": "^4.3.0",
+    "popper.js": "^1.12.6",
+    "webpack": "2.2.0"
   }
 }
