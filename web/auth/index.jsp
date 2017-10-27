@@ -58,11 +58,11 @@
                       <div class="p-sm-1">
                           <label class="sr-only" for="rg_password">Password</label>
                           <div class="input-group mb-2 mb-sm-0">
-                              <input type="password" class="form-control" id="rg_password" v-model="rg_password" name="password" placeholder="Password" required>
+                              <input type="password" class="form-control" @keyup.enter="authenticate(registerData)" id="rg_password" v-model="rg_password" name="password" placeholder="Password" required>
                           </div>
                       </div>
                   </form>
-                  <button class="btn btn-primary bg-primary btn-block" @click="authenticate(registerData)">Register</button>
+                  <button class="btn btn-primary bg-primary btn-block"  @click="authenticate(registerData)">Register</button>
 
               </div>
           </div>
@@ -84,7 +84,7 @@
                   <div class="p-sm-1">
                       <label class="sr-only" for="inputPassword">Password</label>
                       <div class="input-group mb-2 mb-sm-0">
-                          <input type="password" class="form-control" name="password" v-model="password" id="inputPassword" placeholder="Password" required>
+                          <input type="password" class="form-control" name="password"  @keyup.enter="authenticate(loginData)" v-model="password" id="inputPassword" placeholder="Password" required>
                       </div>
                   </div>
                   <div class="checkbox">

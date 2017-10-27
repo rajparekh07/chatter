@@ -127,35 +127,47 @@ public class User extends Model{
         return new User(rs);
     }
 
-    public List followers () throws Exception {
+    public List followers () {
         List<User> followers = new ArrayList<>();
 
         String query = " SELECT * FROM " + TABLE_NAME + " u WHERE u.id IN " + "(" +
                 "SELECT from_user_id FROM followers WHERE to_user_id = " + this.id +
                 ")";
 
-        ResultSet rs = Database.init().query(query).fireSelect();
-        while (!rs.last()) {
-            followers.add(new User(rs));
-            rs.next();
+        try {
+            ResultSet rs = Database.init().query(query).fireSelect();
+            rs.first();
+
+            while (!rs.isAfterLast()) {
+                followers.add(new User(rs));
+                rs.next();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return followers;
     }
 
-    public List<User> following () throws Exception {
+    public List<User> following () {
         List<User> following = new ArrayList<>();
 
         String query = " SELECT * FROM " + TABLE_NAME + " u WHERE u.id IN " + "(" +
                 "SELECT to_user_id FROM followers WHERE from_user_id = " + this.id +
                 ")";
 
-        ResultSet rs = Database.init().query(query).fireSelect();
-        rs.first();
-        while (!rs.isAfterLast()) {
-            following.add(new User(rs));
-            rs.next();
+        ResultSet rs = null;
+        try {
+            rs = Database.init().query(query).fireSelect();
+            rs.first();
+            while (!rs.isAfterLast()) {
+                following.add(new User(rs));
+                rs.next();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
 
         return following;
     }

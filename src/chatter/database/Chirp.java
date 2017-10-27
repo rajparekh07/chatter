@@ -87,7 +87,7 @@ public class Chirp extends Model {
         List<Chirp> timeline = new ArrayList<>();
         List<User> following = User.findUser(user_id).following();
         String userListString = following.stream().map( user -> user.id + "").collect(Collectors.joining(","));
-        String query = "SELECT * from " + TABLE_NAME + " where user_id IN (" + userListString + ") order by created_at desc LIMIT "+count;
+        String query = "SELECT * from " + TABLE_NAME + " where user_id IN (" + userListString + "," + user_id +") order by created_at desc LIMIT "+count;
         ResultSet resultSet = Database.init().query(query).fireSelect();
         resultSet.first();
         while(!resultSet.isAfterLast()) {

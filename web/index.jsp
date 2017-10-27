@@ -28,7 +28,7 @@
                 <div class="card-body">
                     <form>
                         <div class="form-group">
-                            <textarea class="form-control" id="exampleFormControlTextarea1" name="chirp" v-model="new_chirp" v-validate="'required|max:140'" rows="3" placeholder="What is Happening?"></textarea>
+                            <textarea class="form-control" @keyup.enter="send" id="exampleFormControlTextarea1" name="chirp" v-model="new_chirp" v-validate="'required|max:140'" rows="3" placeholder="What is Happening?"></textarea>
                         </div>
                         <p class="text-danger"> {{ errors.first("chirp") }} </p>
 
@@ -52,7 +52,7 @@
             >
                 <div class="card-body">
 
-                    <h5 class="card-title">                    <img src="/public/download.jpeg" style="width: 35px!important;" class="rounded-circle">
+                    <h5 class="card-title" @click="goTo(chirp.user.name)">                    <img src="/public/download.jpeg" style="width: 35px!important;" class="rounded-circle">
                         @ {{ chirp.user.name }}</h5>
                     <p class="card-text font-weight-light">{{ chirp.data }}</p>
                     <div>
@@ -60,7 +60,7 @@
 
                             &nbsp;&nbsp;
                         </div>
-                        <button class="btn  rounded-circle" @click="like(chirp.id)" :class="chirp.liked ? 'bg-danger text-white' : 'btn-outline-danger'">&#9825;</button>
+                        <button class="btn " @click="like(chirp.id)" :class="chirp.liked ? 'bg-danger text-white' : 'btn-outline-danger'">&#9825; {{ chirp.likes}}</button>
 
                         <span class="float-right"> {{ chirp.created_at }}</span>
 
@@ -98,9 +98,11 @@
                 var vm = this;
                 axios.post(url, data).then(function (response) {
                    if (response.data.success) {
-                       vm.fetchChirps();
                        window.success("Sent!");
                        vm.reset();
+                       vm.fetchChirps(vm.count);
+                       vm.errors.clear();
+
                    }
                 }).catch(function () {
 
@@ -128,6 +130,9 @@
                     }).catch( function () {
 
                 });
+            },
+            goTo (name) {
+                window.location.href = '/profile/?name=' + name
             }
         }
     });

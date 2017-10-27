@@ -36,7 +36,11 @@
                     jsonObject.put("created_at", chirp.timestamp);
                     ResultSet rs = Database.init().query("SELECT id from likes where chirp_id = " + chirp.id + " and user_id = " + user.id).fireSelect();
                     boolean liked = rs.first();
+                    ResultSet rs2 = Database.init().query("SELECT count(id) from likes where chirp_id = " + chirp.id).fireSelect();
+                    rs2.first();
+                    int likes = rs2.getInt(1);
                     jsonObject.put("liked", liked);
+                    jsonObject.put("likes", likes);
                     array.add(jsonObject);
                 }
 
